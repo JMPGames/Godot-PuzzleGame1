@@ -9,15 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "BaseBoardCreator",
+"language": "GDScript",
+"path": "res://scripts/base/base_board_creator.gd"
+}, {
 "base": "BoardController",
 "class": "BaseGameBoardController",
 "language": "GDScript",
 "path": "res://scripts/base/base_game_board_controller.gd"
-}, {
-"base": "Node",
-"class": "BaseGameBoardCreator",
-"language": "GDScript",
-"path": "res://scripts/base/base_board_creator.gd"
 }, {
 "base": "GameController",
 "class": "BaseGameController",
@@ -49,27 +49,45 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/util/player.gd"
 }, {
+"base": "BaseBoardCreator",
+"class": "SurviveBoardCreator",
+"language": "GDScript",
+"path": "res://scripts/survive/survive_board_creator.gd"
+}, {
+"base": "GameController",
+"class": "SurviveGameController",
+"language": "GDScript",
+"path": "res://scripts/survive/survive_game_controller.gd"
+}, {
+"base": "Tile",
+"class": "SurviveGameTile",
+"language": "GDScript",
+"path": "res://scripts/survive/survive_game_tile.gd"
+}, {
 "base": "Entity",
 "class": "Tile",
 "language": "GDScript",
 "path": "res://scripts/tile.gd"
 } ]
 _global_script_class_icons={
+"BaseBoardCreator": "",
 "BaseGameBoardController": "",
-"BaseGameBoardCreator": "",
 "BaseGameController": "",
 "BaseGameTile": "",
 "BoardController": "",
 "Entity": "",
 "GameController": "",
 "Player": "",
+"SurviveBoardCreator": "",
+"SurviveGameController": "",
+"SurviveGameTile": "",
 "Tile": ""
 }
 
 [application]
 
 config/name="NumberJumper"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://scenes/BaseGame.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -1,16 +1,14 @@
 extends Tile
 
-class_name BaseGameTile
-
-var highest_number: int
+class_name SurviveGameTile
 
 func activate() -> void:
 	if state == Globals.TileState.OPEN:
-		game_controller.increase_tiles_pressed()
+		game_controller.decrease_tiles_left()
 		if numbers[1] <= 9:
-			game_controller.increase_score(numbers[1])
+			game_controller.adjust_health(-numbers[1])
 		elif numbers[1] == Constants.BOMB_INDEX:
-			game_controller.adjust_health(-1)
+			game_controller.pressed_bomb()
 	._adjust_state()
 
 func flip() -> void:
@@ -25,7 +23,6 @@ func _ready():
 		_get_number(rng.randi_range(0, 10)),
 		_get_number(rng.randi_range(0, 10))
 	)
-	game_controller.increase_max_score(highest_number)
 
 func _get_number(var r: int) -> int:
 	if r > 9:
@@ -34,6 +31,6 @@ func _get_number(var r: int) -> int:
 
 		special_display_placed = true
 	else:
-		if r > highest_number:
-			highest_number = r
+		game_controller.total_numbers += 1
+		game_controller.sum_of_numbers += r
 	return r

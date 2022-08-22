@@ -1,6 +1,6 @@
 extends Node
 
-class_name BaseGameBoardCreator
+class_name BaseBoardCreator
 
 func _ready() -> void:
 	_create_board()
@@ -23,7 +23,7 @@ func _place_player() -> void:
 	)
 
 func _spawn_tile(var x: int, var y: int) -> Node:
-	var tile := Globals.tile_object.instance()
+	var tile := Globals.base_tile_object.instance()
 	add_child(tile)
 	tile.place_entity(x, y)
 	return tile

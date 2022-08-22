@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://art/character_roundGreen.png" type="Texture" id=1]
-[ext_resource path="res://scripts/util/player.gd" type="Script" id=2]
+[ext_resource path="res://scripts/base/base_game_board_controller.gd" type="Script" id=1]
+[ext_resource path="res://scripts/base/base_game_controller.gd" type="Script" id=2]
 [ext_resource path="res://scripts/base/base_board_creator.gd" type="Script" id=3]
-[ext_resource path="res://scripts/base/base_game_board_controller.gd" type="Script" id=4]
-[ext_resource path="res://scripts/base/base_game_controller.gd" type="Script" id=5]
+[ext_resource path="res://scripts/util/player.gd" type="Script" id=4]
+[ext_resource path="res://art/character_roundGreen.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -13,7 +13,7 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
@@ -30,7 +30,7 @@ zoom = Vector2( 0.65, 0.65 )
 [node name="Player" type="Area2D" parent="."]
 position = Vector2( 482, 289 )
 z_index = 99
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -43,13 +43,13 @@ frames = SubResource( 1 )
 animation = "idle"
 
 [node name="BoardController" type="Node" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 
 [node name="BoardCreator" type="Node" parent="."]
 script = ExtResource( 3 )
 
 [node name="GameController" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 2 )
 health = 4
 
 [node name="UI" type="Control" parent="."]
@@ -72,30 +72,30 @@ margin_right = 208.0
 margin_bottom = 372.0
 text = "Score: 9999"
 
-[node name="MaxScoreText" type="RichTextLabel" parent="UI"]
-margin_left = 208.0
-margin_top = 373.0
-margin_right = 379.0
-margin_bottom = 391.0
-text = "Max Score: 100000"
-
 [node name="GoalText" type="RichTextLabel" parent="UI"]
 margin_left = 208.0
 margin_top = 354.0
 margin_right = 379.0
 margin_bottom = 372.0
-text = "Goal: 1000"
+text = "Goal: 10000"
 
-[node name="TimerText" type="RichTextLabel" parent="UI"]
+[node name="AllowedPressesText" type="RichTextLabel" parent="UI"]
+margin_left = 208.0
+margin_top = 373.0
+margin_right = 379.0
+margin_bottom = 391.0
+text = "Allowed Pressed: 10000"
+
+[node name="HealthText" type="RichTextLabel" parent="UI"]
 margin_left = 573.0
 margin_top = 354.0
 margin_right = 660.0
 margin_bottom = 372.0
-text = "00:00:00"
+text = "Health: 9999"
 
-[node name="HealthText" type="RichTextLabel" parent="UI"]
+[node name="TimerText" type="RichTextLabel" parent="UI"]
 margin_left = 573.0
 margin_top = 372.0
 margin_right = 660.0
 margin_bottom = 390.0
-text = "Health: 9999"
+text = "00:00:00:000"
