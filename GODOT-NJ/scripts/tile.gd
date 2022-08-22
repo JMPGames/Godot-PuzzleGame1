@@ -1,46 +1,63 @@
-extends Area2D
+extends Entity
 
 class_name Tile
 
-export(Constants.TileType) var tile_type
-onready var left_display: Sprite = get_node("LeftDisplay")
-onready var mid_display: Sprite = get_node("MidDisplay")
-onready var right_display: Sprite = get_node("RightDisplay")
-var blocked: bool
-var numbers: Array = []
-var current_number: int
+var state = Globals.TileState.OPEN
+var rng: RandomNumberGenerator
+var numbers: Array
+var special_display_placed: bool
 
-func activate():
-	print("tile.activate")
+func activate() -> void:
+	push_error("NotImplementedError")
 
-func _ready():
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+func _ready() -> void:
+	game_controller = get_node("../../GameController")
+	rng = RandomNumberGenerator.new()
 	rng.randomize()
-	
-	current_number = 1
-	left_display.set_texture(_get_number(rng.randi_range(0, 9)))
-	mid_display.set_texture(_get_number(rng.randi_range(0, 9)))
-	right_display.set_texture(_get_number(rng.randi_range(0, 9)))
 
-func _get_number(var r: int):
-	numbers.append(r)
-	if r == 0:
-		return Constants.art_num_0
-	elif r == 1:
-		return Constants.art_num_1
-	elif r == 2:
-		return Constants.art_num_2
-	elif r == 3:
-		return Constants.art_num_3
-	elif r == 4:
-		return Constants.art_num_4
-	elif r == 5:
-		return Constants.art_num_5
-	elif r == 6:
-		return Constants.art_num_6
-	elif r == 7:
-		return Constants.art_num_7
-	elif r == 8:
-		return Constants.art_num_8
-	else:
-		return Constants.art_num_9
+func _adjust_state() -> void:
+	match state:
+		Globals.TileState.OPEN:
+			$Tile.modulate = Color(0, 1, 1)
+			$LeftDisplay.modulate = Color(1, 1, 1)
+			$MidDisplay.modulate = Color(1, 1, 1)
+			$RightDisplay.modulate = Color(1, 1, 1)
+			state = Globals.TileState.PRESSED
+		Globals.TileState.PRESSED:
+			$Tile.modulate = Color(1, 0, 0)
+			state = Globals.TileState.BLOCKED
+
+func _update_displays(left: int, mid: int, right: int) -> void:
+	$LeftDisplay.set_texture(_get_texture(left))
+	$MidDisplay.set_texture(_get_texture(mid))
+	$RightDisplay.set_texture(_get_texture(right))
+
+func _get_texture(var number: int):
+	numbers.append(number)
+	
+	if number == 0:
+		return Globals.art_num_0
+	elif number == 1:
+		return Globals.art_num_1
+	elif number == 2:
+		return Globals.art_num_2
+	elif number == 3:
+		return Globals.art_num_3
+	elif number == 4:
+		return Globals.art_num_4
+	elif number == 5:
+		return Globals.art_num_5
+	elif number == 6:
+		return Globals.art_num_6
+	elif number == 7:
+		return Globals.art_num_7
+	elif number == 8:
+		return Globals.art_num_8
+	elif number == 9:
+		return Globals.art_num_9
+	elif number == Constants.BOMB_INDEX:
+		return Globals.art_bomb
+
+func _get_number(var r: int) -> int:
+	push_error("NotImplementedError")
+	return -1

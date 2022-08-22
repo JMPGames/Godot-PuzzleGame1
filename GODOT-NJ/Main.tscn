@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://art/character_roundGreen.png" type="Texture" id=1]
-[ext_resource path="res://scripts/player.gd" type="Script" id=2]
-[ext_resource path="res://scripts/board_creator.gd" type="Script" id=3]
+[ext_resource path="res://scripts/util/player.gd" type="Script" id=2]
+[ext_resource path="res://scripts/base/base_board_creator.gd" type="Script" id=3]
+[ext_resource path="res://scripts/base/base_game_board_controller.gd" type="Script" id=4]
+[ext_resource path="res://scripts/base/base_game_controller.gd" type="Script" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -17,18 +19,83 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Main" type="Node2D"]
+[node name="BaseGame" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 193, 143 )
+offset = Vector2( 65, 25 )
+current = true
+zoom = Vector2( 0.65, 0.65 )
 
 [node name="Player" type="Area2D" parent="."]
+position = Vector2( 482, 289 )
+z_index = 99
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+entity_type = 1
+title = "Player"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "idle"
 
+[node name="BoardController" type="Node" parent="."]
+script = ExtResource( 4 )
+
 [node name="BoardCreator" type="Node" parent="."]
 script = ExtResource( 3 )
+
+[node name="GameController" type="Node" parent="."]
+script = ExtResource( 5 )
+health = 4
+
+[node name="UI" type="Control" parent="."]
+margin_left = -75.0
+margin_top = -26.0
+margin_right = 592.0
+margin_bottom = 363.0
+
+[node name="TilesPressedText" type="RichTextLabel" parent="UI"]
+margin_left = 5.0
+margin_top = 373.0
+margin_right = 208.0
+margin_bottom = 391.0
+text = "Tiles Pressed: 9999"
+
+[node name="ScoreText" type="RichTextLabel" parent="UI"]
+margin_left = 5.0
+margin_top = 354.0
+margin_right = 208.0
+margin_bottom = 372.0
+text = "Score: 9999"
+
+[node name="MaxScoreText" type="RichTextLabel" parent="UI"]
+margin_left = 208.0
+margin_top = 373.0
+margin_right = 379.0
+margin_bottom = 391.0
+text = "Max Score: 100000"
+
+[node name="GoalText" type="RichTextLabel" parent="UI"]
+margin_left = 208.0
+margin_top = 354.0
+margin_right = 379.0
+margin_bottom = 372.0
+text = "Goal: 1000"
+
+[node name="TimerText" type="RichTextLabel" parent="UI"]
+margin_left = 573.0
+margin_top = 354.0
+margin_right = 660.0
+margin_bottom = 372.0
+text = "00:00:00"
+
+[node name="HealthText" type="RichTextLabel" parent="UI"]
+margin_left = 573.0
+margin_top = 372.0
+margin_right = 660.0
+margin_bottom = 390.0
+text = "Health: 9999"
