@@ -14,5 +14,5 @@ onready var art_num_8 = preload("res://art/ui_num8.png")
 onready var art_num_9 = preload("res://art/ui_num9.png")
 onready var art_bomb = preload("res://art/tile_bomb.png")
 
-enum GameState {PAUSED, ACTIVE}
+enum GameState {PAUSED, ACTIVE, GAME_OVER}
 enum TileState {OPEN, PRESSED, BLOCKED}

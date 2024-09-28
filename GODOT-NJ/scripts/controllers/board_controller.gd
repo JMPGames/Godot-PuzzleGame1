@@ -5,14 +5,14 @@ class_name BoardController
 # Two-dimensional Array
 var board: Array
 var game_controller: Node
-var board_size: int
+var board_size: Vector2
 
-func build_board(_game_controller: Node, selected_board_size: int) -> void:
+func build_board(_game_controller: Node, selected_board_size: Vector2) -> void:
 	game_controller = _game_controller
 	board_size = selected_board_size
-	for x in range(board_size):
+	for x in range(selected_board_size.x):
 		board.append([])
-		for y in range(board_size):
+		for y in range(selected_board_size.y):
 			board[x].append(_spawn_tile(x, y))
 
 func get_tile_at_position(var x: int, var y: int) -> Object:
@@ -40,7 +40,7 @@ func _flip_adjacent_tiles_around_position(var x: int, var y: int) -> void:
 			tile.flip()
 
 func _position_is_out_of_bounds(var x: int, var y: int) -> bool:
-	return x < 0 || y < 0 || x >= board_size || y >= board_size
+	return x < 0 || y < 0 || x >= board_size.x || y >= board_size.y
 
 func _spawn_tile(var x: int, var y: int) -> Node:
 	var tile: Node = _get_tile_by_mode()
@@ -50,9 +50,9 @@ func _spawn_tile(var x: int, var y: int) -> Node:
 	return tile
 
 func _get_tile_by_mode() -> Node:
-	if SceneController.game_mode == Constants.BASE_GAME_MODE_ID:
+	if DataController.game_mode == Constants.BASE_GAME_MODE_ID:
 		return Globals.base_tile_object.instance()
-	elif SceneController.game_mode == Constants.SURVIVAL_GAME_MODE_ID:
+	elif DataController.game_mode == Constants.SURVIVAL_GAME_MODE_ID:
 		return Globals.survive_tile_object.instance()
 	else:
 		return Globals.base_tile_object.instance()

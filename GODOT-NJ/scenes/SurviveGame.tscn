@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/controllers/board_controller.gd" type="Script" id=1]
 [ext_resource path="res://scripts/modes/survive/survive_game_controller.gd" type="Script" id=2]
 [ext_resource path="res://scripts/main.gd" type="Script" id=3]
 [ext_resource path="res://scripts/entities/player.gd" type="Script" id=4]
 [ext_resource path="res://art/character_roundGreen.png" type="Texture" id=5]
+[ext_resource path="res://scripts/controllers/pause_menu_controller.gd" type="Script" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,10 +24,9 @@ animations = [ {
 script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 193, 143 )
-offset = Vector2( 65, 25 )
+position = Vector2( 100, 100 )
 current = true
-zoom = Vector2( 0.65, 0.65 )
+zoom = Vector2( 0.5, 0.5 )
 
 [node name="Player" type="Area2D" parent="."]
 position = Vector2( 482, 289 )
@@ -49,30 +49,80 @@ script = ExtResource( 1 )
 [node name="GameController" type="Node" parent="."]
 script = ExtResource( 2 )
 
-[node name="UI" type="Control" parent="."]
-margin_left = -75.0
-margin_top = -26.0
-margin_right = 592.0
-margin_bottom = 363.0
+[node name="MenuController" type="Node" parent="."]
+script = ExtResource( 6 )
 
-[node name="HealthText" type="RichTextLabel" parent="UI"]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UI"]
+margin_right = 1026.0
+margin_bottom = 597.0
+
+[node name="HealthText" type="RichTextLabel" parent="UI/UI"]
 margin_left = 5.0
-margin_top = 354.0
+margin_top = 559.0
 margin_right = 208.0
-margin_bottom = 372.0
+margin_bottom = 577.0
 text = "Health 999"
 
-[node name="TilesLeftText" type="RichTextLabel" parent="UI"]
+[node name="TilesLeftText" type="RichTextLabel" parent="UI/UI"]
 margin_left = 5.0
-margin_top = 373.0
+margin_top = 578.0
 margin_right = 208.0
-margin_bottom = 391.0
-text = "Tiles: Left 999
-"
+margin_bottom = 594.0
+text = "Tiles: Left 999"
 
-[node name="TimerText" type="RichTextLabel" parent="UI"]
-margin_left = 573.0
-margin_top = 372.0
-margin_right = 660.0
-margin_bottom = 390.0
+[node name="TimerText" type="RichTextLabel" parent="UI/UI"]
+margin_left = 928.0
+margin_top = 577.0
+margin_right = 1015.0
+margin_bottom = 595.0
 text = "00:00:00:000"
+
+[node name="MenuButton" type="Button" parent="UI/UI"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 95.0
+margin_bottom = 25.0
+text = "Menu"
+
+[node name="Menu" type="Panel" parent="UI/UI"]
+visible = false
+margin_left = 340.0
+margin_top = 100.0
+margin_right = 740.0
+margin_bottom = 500.0
+
+[node name="PausedLabel" type="Label" parent="UI/UI/Menu"]
+margin_right = 200.0
+margin_bottom = 60.0
+rect_scale = Vector2( 2, 2 )
+text = "Paused"
+align = 1
+valign = 1
+
+[node name="ResumeButton" type="Button" parent="UI/UI/Menu"]
+margin_left = 159.0
+margin_top = 142.0
+margin_right = 171.0
+margin_bottom = 162.0
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="UI/UI/Menu"]
+margin_left = 159.0
+margin_top = 182.0
+margin_right = 223.0
+margin_bottom = 202.0
+text = "Restart"
+
+[node name="QuitToMenuButton" type="Button" parent="UI/UI/Menu"]
+margin_left = 158.0
+margin_top = 224.0
+margin_right = 222.0
+margin_bottom = 244.0
+text = "Main Menu"
+
+[connection signal="button_up" from="UI/UI/MenuButton" to="MenuController" method="_on_MenuButton_button_up"]
+[connection signal="button_up" from="UI/UI/Menu/ResumeButton" to="MenuController" method="_on_ResumeButton_button_up"]
+[connection signal="button_up" from="UI/UI/Menu/RestartButton" to="MenuController" method="_on_RestartButton_button_up"]
+[connection signal="button_up" from="UI/UI/Menu/QuitToMenuButton" to="MenuController" method="_on_QuitToMenuButton_button_up"]

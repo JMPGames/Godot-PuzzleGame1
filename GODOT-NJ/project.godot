@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/controllers/main_menu_controller.gd"
 }, {
+"base": "Node",
+"class": "PauseMenuController",
+"language": "GDScript",
+"path": "res://scripts/controllers/pause_menu_controller.gd"
+}, {
 "base": "Entity",
 "class": "Player",
 "language": "GDScript",
@@ -72,6 +77,7 @@ _global_script_class_icons={
 "GameController": "",
 "Main": "",
 "MainMenuController": "",
+"PauseMenuController": "",
 "Player": "",
 "SurviveGameController": "",
 "SurviveGameTile": "",
@@ -88,7 +94,7 @@ config/icon="res://icon.png"
 
 Constants="*res://scripts/util/constants.gd"
 Globals="*res://scripts/util/globals.gd"
-SceneController="*res://scripts/controllers/scene_controller.gd"
+DataController="*res://scripts/controllers/data_controller.gd"
 
 [display]
 

@@ -20,16 +20,18 @@ func _adjust_state() -> void:
 			$LeftDisplay.modulate = Color(1, 1, 1)
 			$MidDisplay.modulate = Color(1, 1, 1)
 			$RightDisplay.modulate = Color(1, 1, 1)
-			if SceneController.difficulty == Constants.HARD_DIFFICULTY_ID:
-				$Tile.modulate = Color(1, 0, 0)
-				state = Globals.TileState.BLOCKED
+			if DataController.difficulty == Constants.HARD_DIFFICULTY_ID:
+				_set_to_blocked_state()
 			else:
 				$Tile.modulate = Color(0, 1, 1)
 				state = Globals.TileState.PRESSED
 		Globals.TileState.PRESSED:
-			if SceneController.difficulty != Constants.EASY_DIFFICULTY_ID:
-				$Tile.modulate = Color(1, 0, 0)
-				state = Globals.TileState.BLOCKED
+			if DataController.difficulty != Constants.EASY_DIFFICULTY_ID:
+				_set_to_blocked_state()
+
+func _set_to_blocked_state() -> void:
+	$Tile.modulate = Color(1, 0, 0)
+	state = Globals.TileState.BLOCKED
 
 func _update_displays(left: int, mid: int, right: int) -> void:
 	$LeftDisplay.set_texture(_get_texture(left))
@@ -38,29 +40,29 @@ func _update_displays(left: int, mid: int, right: int) -> void:
 
 func _get_texture(var number: int):
 	numbers.append(number)
-	
-	if number == 0:
-		return Globals.art_num_0
-	elif number == 1:
-		return Globals.art_num_1
-	elif number == 2:
-		return Globals.art_num_2
-	elif number == 3:
-		return Globals.art_num_3
-	elif number == 4:
-		return Globals.art_num_4
-	elif number == 5:
-		return Globals.art_num_5
-	elif number == 6:
-		return Globals.art_num_6
-	elif number == 7:
-		return Globals.art_num_7
-	elif number == 8:
-		return Globals.art_num_8
-	elif number == 9:
-		return Globals.art_num_9
-	elif number == Constants.BOMB_INDEX:
-		return Globals.art_bomb
+	match number:
+		0:
+			return Globals.art_num_0
+		1:
+			return Globals.art_num_1
+		2:
+			return Globals.art_num_2
+		3:
+			return Globals.art_num_3
+		4:
+			return Globals.art_num_4
+		5:
+			return Globals.art_num_5
+		6:
+			return Globals.art_num_6
+		7:
+			return Globals.art_num_7
+		8:
+			return Globals.art_num_8
+		9:
+			return Globals.art_num_9
+		Constants.BOMB_INDEX:
+			return Globals.art_bomb
 
 func _get_number(var r: int = -1) -> int:
 	push_error("NotImplementedError")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/controllers/board_controller.gd" type="Script" id=1]
 [ext_resource path="res://scripts/modes/base/base_game_controller.gd" type="Script" id=2]
 [ext_resource path="res://scripts/main.gd" type="Script" id=3]
 [ext_resource path="res://scripts/entities/player.gd" type="Script" id=4]
 [ext_resource path="res://art/character_roundGreen.png" type="Texture" id=5]
+[ext_resource path="res://scripts/controllers/pause_menu_controller.gd" type="Script" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,10 +24,9 @@ animations = [ {
 script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 4, 41 )
-offset = Vector2( 65, 25 )
+position = Vector2( 100, 115 )
 current = true
-zoom = Vector2( 0.65, 0.65 )
+zoom = Vector2( 0.72, 0.72 )
 
 [node name="Player" type="Area2D" parent="."]
 position = Vector2( 869, 22 )
@@ -50,50 +50,102 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 health = 4
 
-[node name="UI" type="Control" parent="."]
-margin_left = -266.0
-margin_top = -129.0
-margin_right = 401.0
-margin_bottom = 260.0
+[node name="MenuController" type="Node" parent="."]
+script = ExtResource( 6 )
 
-[node name="TilesPressedText" type="RichTextLabel" parent="UI"]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UI"]
+margin_left = -3.0
+margin_right = 1024.0
+margin_bottom = 597.0
+
+[node name="TilesPressedText" type="RichTextLabel" parent="UI/UI"]
 margin_left = 5.0
-margin_top = 373.0
+margin_top = 583.0
 margin_right = 208.0
-margin_bottom = 391.0
+margin_bottom = 601.0
 text = "Tiles Pressed: 9999"
 
-[node name="ScoreText" type="RichTextLabel" parent="UI"]
+[node name="ScoreText" type="RichTextLabel" parent="UI/UI"]
 margin_left = 5.0
-margin_top = 354.0
+margin_top = 564.0
 margin_right = 208.0
-margin_bottom = 372.0
+margin_bottom = 582.0
 text = "Score: 9999"
 
-[node name="GoalText" type="RichTextLabel" parent="UI"]
+[node name="GoalText" type="RichTextLabel" parent="UI/UI"]
 margin_left = 208.0
-margin_top = 354.0
+margin_top = 564.0
 margin_right = 379.0
-margin_bottom = 372.0
+margin_bottom = 582.0
 text = "Goal: 10000"
 
-[node name="AllowedPressesText" type="RichTextLabel" parent="UI"]
+[node name="AllowedPressesText" type="RichTextLabel" parent="UI/UI"]
 margin_left = 208.0
-margin_top = 373.0
+margin_top = 583.0
 margin_right = 379.0
-margin_bottom = 391.0
-text = "Allowed Pressed: 10000"
+margin_bottom = 601.0
+text = "Allowed Presses: 10000"
 
-[node name="HealthText" type="RichTextLabel" parent="UI"]
-margin_left = 573.0
-margin_top = 354.0
-margin_right = 660.0
-margin_bottom = 372.0
+[node name="HealthText" type="RichTextLabel" parent="UI/UI"]
+margin_left = 937.0
+margin_top = 564.0
+margin_right = 1024.0
+margin_bottom = 582.0
 text = "Health: 9999"
 
-[node name="TimerText" type="RichTextLabel" parent="UI"]
-margin_left = 573.0
-margin_top = 372.0
-margin_right = 660.0
-margin_bottom = 390.0
+[node name="TimerText" type="RichTextLabel" parent="UI/UI"]
+margin_left = 937.0
+margin_top = 582.0
+margin_right = 1024.0
+margin_bottom = 600.0
 text = "00:00:00:000"
+
+[node name="MenuButton" type="Button" parent="UI/UI"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 95.0
+margin_bottom = 25.0
+text = "Menu"
+
+[node name="Menu" type="Panel" parent="UI/UI"]
+visible = false
+margin_left = 340.0
+margin_top = 100.0
+margin_right = 740.0
+margin_bottom = 500.0
+
+[node name="PausedLabel" type="Label" parent="UI/UI/Menu"]
+margin_right = 200.0
+margin_bottom = 60.0
+rect_scale = Vector2( 2, 2 )
+text = "Paused"
+align = 1
+valign = 1
+
+[node name="ResumeButton" type="Button" parent="UI/UI/Menu"]
+margin_left = 159.0
+margin_top = 142.0
+margin_right = 171.0
+margin_bottom = 162.0
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="UI/UI/Menu"]
+margin_left = 159.0
+margin_top = 182.0
+margin_right = 223.0
+margin_bottom = 202.0
+text = "Restart"
+
+[node name="QuitToMenuButton" type="Button" parent="UI/UI/Menu"]
+margin_left = 158.0
+margin_top = 224.0
+margin_right = 222.0
+margin_bottom = 244.0
+text = "Main Menu"
+
+[connection signal="button_up" from="UI/UI/MenuButton" to="MenuController" method="_on_MenuButton_button_up"]
+[connection signal="button_up" from="UI/UI/Menu/ResumeButton" to="MenuController" method="_on_ResumeButton_button_up"]
+[connection signal="button_up" from="UI/UI/Menu/RestartButton" to="MenuController" method="_on_RestartButton_button_up"]
+[connection signal="button_up" from="UI/UI/Menu/QuitToMenuButton" to="MenuController" method="_on_QuitToMenuButton_button_up"]

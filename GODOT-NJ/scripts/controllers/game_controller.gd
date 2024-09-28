@@ -14,9 +14,9 @@ func _process(delta: float) -> void:
 	if state == Globals.GameState.ACTIVE:
 		_update_game_timer(delta)
 
-func begin(board_size: int) -> void:
-	timer_text = get_node("../UI/TimerText")
-	health_text = get_node("../UI/HealthText")
+func begin(_board_size: Vector2) -> void:
+	timer_text = get_node("../UI/UI/TimerText")
+	health_text = get_node("../UI/UI/HealthText")
 	
 	state = Globals.GameState.ACTIVE
 	health_text.text = "Health: %d" % health
@@ -25,15 +25,20 @@ func adjust_health(amount: int) -> void:
 	health += amount
 	health_text.text = "Health: %d" % health
 	if health <= 0:
-		print("Game Lost")
-		state = Globals.GameState.PAUSED
+		trigger_game_lost()
+
+func trigger_game_won() -> void:
+	print("Game Won")
+	state = Globals.GameState.GAME_OVER
+
+func trigger_game_lost() -> void:
+	print("Game Won")
+	state = Globals.GameState.GAME_OVER
 
 func _update_game_timer(delta: float) -> void:
 	game_timer += delta
-
 	var milliseconds := fmod(game_timer, 1) * 1000
 	var seconds := fmod(game_timer, 60)
 	var minutes := fmod(game_timer, 60 * 60) / 60
-	var hours := fmod(fmod(game_timer, 3600 * 60) / 3600, 24)
-	
+	var hours := fmod(fmod(game_timer, 3600 * 60) / 3600, 24)	
 	timer_text.text = "%02d:%02d:%02d:%02d" % [hours, minutes, seconds, milliseconds]
