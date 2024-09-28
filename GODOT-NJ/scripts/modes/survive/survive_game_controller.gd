@@ -15,7 +15,7 @@ func begin(board_size: int) -> void:
 	
 	max_health = int((average_number * number_of_tiles) * 0.6)
 	health = max_health
-	tiles_left = int((8 * 8) * 0.8)
+	tiles_left = int(number_of_tiles * 0.8)
 	tiles_left_text.text = "Tiles Left: %d" % tiles_left
 	
 	.begin(board_size)
