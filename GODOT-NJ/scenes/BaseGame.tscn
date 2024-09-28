@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scripts/base/base_game_board_controller.gd" type="Script" id=1]
-[ext_resource path="res://scripts/base/base_game_controller.gd" type="Script" id=2]
-[ext_resource path="res://scripts/base/base_board_creator.gd" type="Script" id=3]
-[ext_resource path="res://scripts/util/player.gd" type="Script" id=4]
+[ext_resource path="res://scripts/controllers/board_controller.gd" type="Script" id=1]
+[ext_resource path="res://scripts/modes/base/base_game_controller.gd" type="Script" id=2]
+[ext_resource path="res://scripts/main.gd" type="Script" id=3]
+[ext_resource path="res://scripts/entities/player.gd" type="Script" id=4]
 [ext_resource path="res://art/character_roundGreen.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -20,15 +20,16 @@ animations = [ {
 } ]
 
 [node name="BaseGame" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 193, 143 )
+position = Vector2( 4, 41 )
 offset = Vector2( 65, 25 )
 current = true
 zoom = Vector2( 0.65, 0.65 )
 
 [node name="Player" type="Area2D" parent="."]
-position = Vector2( 482, 289 )
+position = Vector2( 869, 22 )
 z_index = 99
 script = ExtResource( 4 )
 __meta__ = {
@@ -45,18 +46,15 @@ animation = "idle"
 [node name="BoardController" type="Node" parent="."]
 script = ExtResource( 1 )
 
-[node name="BoardCreator" type="Node" parent="."]
-script = ExtResource( 3 )
-
 [node name="GameController" type="Node" parent="."]
 script = ExtResource( 2 )
 health = 4
 
 [node name="UI" type="Control" parent="."]
-margin_left = -75.0
-margin_top = -26.0
-margin_right = 592.0
-margin_bottom = 363.0
+margin_left = -266.0
+margin_top = -129.0
+margin_right = 401.0
+margin_bottom = 260.0
 
 [node name="TilesPressedText" type="RichTextLabel" parent="UI"]
 margin_left = 5.0

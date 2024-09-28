@@ -9,76 +9,70 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
-"class": "BaseBoardCreator",
-"language": "GDScript",
-"path": "res://scripts/base/base_board_creator.gd"
-}, {
-"base": "BoardController",
-"class": "BaseGameBoardController",
-"language": "GDScript",
-"path": "res://scripts/base/base_game_board_controller.gd"
-}, {
 "base": "GameController",
 "class": "BaseGameController",
 "language": "GDScript",
-"path": "res://scripts/base/base_game_controller.gd"
+"path": "res://scripts/modes/base/base_game_controller.gd"
 }, {
 "base": "Tile",
 "class": "BaseGameTile",
 "language": "GDScript",
-"path": "res://scripts/base/base_game_tile.gd"
+"path": "res://scripts/modes/base/base_game_tile.gd"
 }, {
 "base": "Node",
 "class": "BoardController",
 "language": "GDScript",
-"path": "res://scripts/board_controller.gd"
+"path": "res://scripts/controllers/board_controller.gd"
 }, {
 "base": "Area2D",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://scripts/util/entity.gd"
+"path": "res://scripts/entities/entity.gd"
 }, {
 "base": "Node",
 "class": "GameController",
 "language": "GDScript",
-"path": "res://scripts/game_controller.gd"
+"path": "res://scripts/controllers/game_controller.gd"
+}, {
+"base": "Node",
+"class": "Main",
+"language": "GDScript",
+"path": "res://scripts/main.gd"
+}, {
+"base": "Control",
+"class": "MainMenuController",
+"language": "GDScript",
+"path": "res://scripts/controllers/main_menu_controller.gd"
 }, {
 "base": "Entity",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scripts/util/player.gd"
-}, {
-"base": "BaseBoardCreator",
-"class": "SurviveBoardCreator",
-"language": "GDScript",
-"path": "res://scripts/survive/survive_board_creator.gd"
+"path": "res://scripts/entities/player.gd"
 }, {
 "base": "GameController",
 "class": "SurviveGameController",
 "language": "GDScript",
-"path": "res://scripts/survive/survive_game_controller.gd"
+"path": "res://scripts/modes/survive/survive_game_controller.gd"
 }, {
 "base": "Tile",
 "class": "SurviveGameTile",
 "language": "GDScript",
-"path": "res://scripts/survive/survive_game_tile.gd"
+"path": "res://scripts/modes/survive/survive_game_tile.gd"
 }, {
 "base": "Entity",
 "class": "Tile",
 "language": "GDScript",
-"path": "res://scripts/tile.gd"
+"path": "res://scripts/entities/tile.gd"
 } ]
 _global_script_class_icons={
-"BaseBoardCreator": "",
-"BaseGameBoardController": "",
 "BaseGameController": "",
 "BaseGameTile": "",
 "BoardController": "",
 "Entity": "",
 "GameController": "",
+"Main": "",
+"MainMenuController": "",
 "Player": "",
-"SurviveBoardCreator": "",
 "SurviveGameController": "",
 "SurviveGameTile": "",
 "Tile": ""
@@ -87,13 +81,14 @@ _global_script_class_icons={
 [application]
 
 config/name="NumberJumper"
-run/main_scene="res://scenes/BaseGame.tscn"
+run/main_scene="res://scenes/SurviveGame.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Constants="*res://scripts/util/constants.gd"
 Globals="*res://scripts/util/globals.gd"
+SceneController="*res://scripts/controllers/scene_controller.gd"
 
 [display]
 

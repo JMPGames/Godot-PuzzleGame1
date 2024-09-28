@@ -1,6 +1,5 @@
 extends Node
 
-
 onready var base_tile_object: PackedScene = preload("res://prefabs/BaseGameTile.tscn")
 onready var survive_tile_object: PackedScene = preload("res://prefabs/SurviveGameTile.tscn")
 onready var art_num_0 = preload("res://art/ui_num0.png")

@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	if state == Globals.GameState.ACTIVE:
 		_update_game_timer(delta)
 
-func begin() -> void:
+func begin(board_size: int) -> void:
 	timer_text = get_node("../UI/TimerText")
 	health_text = get_node("../UI/HealthText")
 	

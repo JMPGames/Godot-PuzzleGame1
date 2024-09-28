@@ -11,21 +11,25 @@ func activate() -> void:
 	push_error("NotImplementedError")
 
 func _ready() -> void:
-	game_controller = get_node("../../GameController")
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 
 func _adjust_state() -> void:
 	match state:
 		Globals.TileState.OPEN:
-			$Tile.modulate = Color(0, 1, 1)
 			$LeftDisplay.modulate = Color(1, 1, 1)
 			$MidDisplay.modulate = Color(1, 1, 1)
 			$RightDisplay.modulate = Color(1, 1, 1)
-			state = Globals.TileState.PRESSED
+			if SceneController.difficulty == Constants.HARD_DIFFICULTY_ID:
+				$Tile.modulate = Color(1, 0, 0)
+				state = Globals.TileState.BLOCKED
+			else:
+				$Tile.modulate = Color(0, 1, 1)
+				state = Globals.TileState.PRESSED
 		Globals.TileState.PRESSED:
-			$Tile.modulate = Color(1, 0, 0)
-			state = Globals.TileState.BLOCKED
+			if SceneController.difficulty != Constants.EASY_DIFFICULTY_ID:
+				$Tile.modulate = Color(1, 0, 0)
+				state = Globals.TileState.BLOCKED
 
 func _update_displays(left: int, mid: int, right: int) -> void:
 	$LeftDisplay.set_texture(_get_texture(left))
@@ -58,6 +62,6 @@ func _get_texture(var number: int):
 	elif number == Constants.BOMB_INDEX:
 		return Globals.art_bomb
 
-func _get_number(var r: int) -> int:
+func _get_number(var r: int = -1) -> int:
 	push_error("NotImplementedError")
-	return -1
+	return r
