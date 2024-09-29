@@ -20,13 +20,13 @@ func _adjust_state() -> void:
 			$LeftDisplay.modulate = Color(1, 1, 1)
 			$MidDisplay.modulate = Color(1, 1, 1)
 			$RightDisplay.modulate = Color(1, 1, 1)
-			if DataController.difficulty == Constants.HARD_DIFFICULTY_ID:
+			if Constants.HARD_TILE_LOCKING_DIFFICULTIES.has(DataController.difficulty):
 				_set_to_blocked_state()
 			else:
 				$Tile.modulate = Color(0, 1, 1)
 				state = Globals.TileState.PRESSED
 		Globals.TileState.PRESSED:
-			if DataController.difficulty != Constants.EASY_DIFFICULTY_ID:
+			if not Constants.NO_TILE_LOCKING_DIFFICULTIES.has(DataController.difficulty):
 				_set_to_blocked_state()
 
 func _set_to_blocked_state() -> void:

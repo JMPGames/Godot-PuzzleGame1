@@ -11,6 +11,7 @@ func activate() -> void:
 			game_controller.increase_score(numbers[1])
 		elif numbers[1] == Constants.BOMB_INDEX:
 			game_controller.adjust_health(-1)
+			game_controller.increase_score(0)
 	._adjust_state()
 
 func flip() -> void:

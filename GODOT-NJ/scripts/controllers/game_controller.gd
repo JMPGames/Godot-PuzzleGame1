@@ -29,10 +29,12 @@ func adjust_health(amount: int) -> void:
 
 func trigger_game_won() -> void:
 	print("Game Won")
+	DataController.round_finished(true, game_timer)
 	state = Globals.GameState.GAME_OVER
 
 func trigger_game_lost() -> void:
-	print("Game Won")
+	print("Game Lost")
+	DataController.round_finished(false, game_timer)
 	state = Globals.GameState.GAME_OVER
 
 func _update_game_timer(delta: float) -> void:

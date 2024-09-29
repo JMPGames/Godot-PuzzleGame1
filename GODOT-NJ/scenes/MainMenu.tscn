@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/controllers/main_menu_controller.gd" type="Script" id=1]
+[ext_resource path="res://scripts/controllers/main_menu_stat_panel_controller.gd" type="Script" id=2]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -74,6 +75,110 @@ margin_left = 522.0
 margin_top = 190.0
 margin_right = 551.0
 margin_bottom = 210.0
+
+[node name="StatsPanel" type="Panel" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 300.0
+margin_bottom = 266.0
+script = ExtResource( 2 )
+
+[node name="SelectedModeText" type="Label" parent="StatsPanel"]
+margin_right = 290.0
+margin_bottom = 40.0
+text = "Score Attack - Beginner - Small"
+align = 1
+valign = 1
+
+[node name="BestTimeLabel" type="Label" parent="StatsPanel"]
+margin_left = 5.0
+margin_top = 40.0
+margin_right = 180.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "Best Time:"
+valign = 1
+
+[node name="BestTimeText" type="Label" parent="StatsPanel"]
+margin_left = 145.0
+margin_top = 40.0
+margin_right = 321.0
+margin_bottom = 80.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "0.00"
+valign = 1
+
+[node name="AverageTimeLabel" type="Label" parent="StatsPanel"]
+margin_left = 5.0
+margin_top = 80.0
+margin_right = 180.0
+margin_bottom = 120.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "Average Time:"
+valign = 1
+
+[node name="AverageTimeText" type="Label" parent="StatsPanel"]
+margin_left = 145.0
+margin_top = 80.0
+margin_right = 321.0
+margin_bottom = 120.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "0.00"
+valign = 1
+
+[node name="WinPercentageLabel" type="Label" parent="StatsPanel"]
+margin_left = 5.0
+margin_top = 120.0
+margin_right = 180.0
+margin_bottom = 160.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "Win Percentage:"
+valign = 1
+
+[node name="WinPercentageText" type="Label" parent="StatsPanel"]
+margin_left = 145.0
+margin_top = 120.0
+margin_right = 321.0
+margin_bottom = 160.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "50%"
+valign = 1
+
+[node name="GamesWonLabel" type="Label" parent="StatsPanel"]
+margin_left = 5.0
+margin_top = 160.0
+margin_right = 180.0
+margin_bottom = 200.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "Games Won:"
+valign = 1
+
+[node name="GamesWonText" type="Label" parent="StatsPanel"]
+margin_left = 145.0
+margin_top = 160.0
+margin_right = 321.0
+margin_bottom = 200.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "50"
+valign = 1
+
+[node name="GamesPlayedLabel" type="Label" parent="StatsPanel"]
+margin_left = 6.0
+margin_top = 200.0
+margin_right = 181.0
+margin_bottom = 240.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "Games Played:"
+valign = 1
+
+[node name="GamesPlayedText" type="Label" parent="StatsPanel"]
+margin_left = 146.0
+margin_top = 200.0
+margin_right = 322.0
+margin_bottom = 240.0
+rect_scale = Vector2( 0.8, 0.8 )
+text = "50"
+valign = 1
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="button_down" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_button_down"]
