@@ -1,5 +1,4 @@
 extends Entity
-
 class_name Tile
 
 var state = Globals.TileState.OPEN
@@ -38,7 +37,7 @@ func _update_displays(left: int, mid: int, right: int) -> void:
 	$MidDisplay.set_texture(_get_texture(mid))
 	$RightDisplay.set_texture(_get_texture(right))
 
-func _get_texture(var number: int):
+func _get_texture(number: int):
 	numbers.append(number)
 	match number:
 		0:
@@ -64,6 +63,6 @@ func _get_texture(var number: int):
 		Constants.BOMB_INDEX:
 			return Globals.art_bomb
 
-func _get_number(var r: int = -1) -> int:
+func _get_number(r: int = -1) -> int:
 	push_error("NotImplementedError")
 	return r

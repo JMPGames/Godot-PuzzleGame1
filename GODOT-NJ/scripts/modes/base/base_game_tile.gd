@@ -1,5 +1,4 @@
 extends Tile
-
 class_name BaseGameTile
 
 var highest_number: int
@@ -28,7 +27,7 @@ func _ready():
 	)
 	game_controller.increase_max_score(highest_number)
 
-func _get_number(var r: int = -1) -> int:
+func _get_number(r: int = -1) -> int:
 	if r > 9:
 		if special_display_placed:
 			return rng.randi_range(0, 9)

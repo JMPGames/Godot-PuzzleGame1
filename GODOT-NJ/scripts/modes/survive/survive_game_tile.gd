@@ -24,7 +24,7 @@ func _ready():
 		_get_number(rng.randi_range(0, 10))
 	)
 
-func _get_number(var r: int = -1) -> int:
+func _get_number(r: int = -1) -> int:
 	if r > 9:
 		if special_display_placed:
 			return rng.randi_range(0, 9)

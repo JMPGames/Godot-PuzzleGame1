@@ -1,5 +1,4 @@
 extends GameController
-
 class_name BaseGameController
 
 var EASY_GOAL_MOD: float = 0.5
@@ -20,11 +19,9 @@ func begin(_board_size: Vector2) -> void:
 	goal_text = get_node("../UI/UI/GoalText")
 	tiles_pressed_text = get_node("../UI/UI/TilesPressedText")
 	set_score(0)
-	#set_goal(_get_goal_based_on_difficulty())
-	set_goal(25)
+	set_goal(_get_goal_based_on_difficulty())
 	
-	#allowed_presses = int((_board_size.x * _board_size.y) * 0.8)
-	allowed_presses = 5
+	allowed_presses = int((_board_size.x * _board_size.y) * 0.8)
 	allowed_presses_text.text = "Allowed Presses: %d" % allowed_presses
 	tiles_pressed_text.text = "Tiles Pressed: 0"	
 	.begin(_board_size)

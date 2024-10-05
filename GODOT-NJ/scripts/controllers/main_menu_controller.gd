@@ -1,5 +1,4 @@
 extends Control
-
 class_name MainMenuController
 
 onready var game_mode_option = $GameModeOption
@@ -27,11 +26,9 @@ func _addOptions():
 
 func _on_StartButton_pressed():
 	if DataController.game_mode == Constants.BASE_GAME_MODE_ID:
-		# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://scenes/BaseGame.tscn")
+		get_tree().change_scene(Constants.BASE_GAME_SCENE_PATH) # warning-ignore:return_value_discarded
 	elif DataController.game_mode == Constants.SURVIVAL_GAME_MODE_ID:
-		# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://scenes/SurviveGame.tscn")
+		get_tree().change_scene(Constants.SURVIVAL_GAME_SCENE_PATH) # warning-ignore:return_value_discarded
 
 func _on_GameModeOption_item_selected(index: int):
 	DataController.set_game_mode(index)

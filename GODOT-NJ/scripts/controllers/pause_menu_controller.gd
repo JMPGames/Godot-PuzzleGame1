@@ -22,7 +22,7 @@ func _on_ResumeButton_button_up():
 		game_controller.state = Globals.GameState.ACTIVE
 
 func _on_RestartButton_button_up():
-	get_tree().reload_current_scene()
+	get_tree().reload_current_scene() # warning-ignore:return_value_discarded
 
 func _on_QuitToMenuButton_button_up():
-	get_tree().change_scene("res://scenes/MainMenu.tscn")
+	get_tree().change_scene(Constants.MAIN_MENU_SCENE_PATH) # warning-ignore:return_value_discarded

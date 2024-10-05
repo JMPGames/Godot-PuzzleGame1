@@ -1,5 +1,9 @@
 extends Node
 
+var MAIN_MENU_SCENE_PATH: String = "res://scenes/MainMenu.tscn"
+var BASE_GAME_SCENE_PATH: String = "res://scenes/BaseGame.tscn"
+var SURVIVAL_GAME_SCENE_PATH: String = "res://scenes/SurviveGame.tscn"
+
 var GAME_MODES: Array = ["Score Attack", "Survival", "Dungeon"]
 var BOARD_SIZES: Array = ["Small", "Medium", "Large", "X-Large"]
 var DIFFICULTIES: Array = [

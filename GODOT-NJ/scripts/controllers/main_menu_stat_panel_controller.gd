@@ -13,15 +13,13 @@ func setup() -> void:
 	var game_mode: String = Constants.GAME_MODES[DataController.game_mode]
 	var difficulty: String = Constants.DIFFICULTIES[DataController.difficulty]
 	var board_size: String = Constants.BOARD_SIZES[DataController.board_size]
-	var stats: Stats = DataController.get_current_selections_stats()
+	var stats := DataController.get_current_selections_stats()
 	
 	var average_time: float = 0.0
-	var win_percentage: int = 0
+	var win_percentage: float = 0
 	if stats.rounds_played > 0:
 		average_time = stats.total_time / stats.rounds_played
 		win_percentage = (float(stats.rounds_won) / float(stats.rounds_played)) * 100
-		print("Won/Played: %s" % [stats.rounds_won / stats.rounds_played])
-		print("Win: %s" % [win_percentage])
 		
 	selected_mode_text.text = "%s - %s - %s" % [game_mode, board_size, difficulty]
 	best_time_text.text = str(stepify(stats.best_time, 0.01))

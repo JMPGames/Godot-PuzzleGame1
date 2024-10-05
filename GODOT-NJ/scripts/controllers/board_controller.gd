@@ -1,8 +1,6 @@
 extends Node
-
 class_name BoardController
 
-# Two-dimensional Array
 var board: Array
 var game_controller: Node
 var board_size: Vector2
@@ -15,21 +13,20 @@ func build_board(_game_controller: Node, selected_board_size: Vector2) -> void:
 		for y in range(selected_board_size.y):
 			board[x].append(_spawn_tile(x, y))
 
-func get_tile_at_position(var x: int, var y: int) -> Object:
-	if _position_is_out_of_bounds(x, y):
-		return null
-	return board[x][y]
+func get_tile_at_position(x: int, y: int) -> Object:
+	return null if _position_is_out_of_bounds(x, y) else board[x][y]
 
-func tile_at_position_is_blocked(var x: int, var y: int) -> bool:
+func tile_at_position_is_blocked(x: int, y: int) -> bool:
 	return _position_is_out_of_bounds(x, y) || board[x][y] == null || board[x][y].state == Globals.TileState.BLOCKED
 
-func activate_tile_at_position(var x: int, var y: int) -> void:
-	if get_tile_at_position(x, y).state == Globals.TileState.OPEN:
+func activate_tile_at_position(x: int, y: int) -> void:
+	var tile: Object = get_tile_at_position(x, y)
+	if tile.state == Globals.TileState.OPEN:
 		_flip_adjacent_tiles_around_position(x, y)
-	get_tile_at_position(x, y).activate()
+	tile.activate()
 
-func _flip_adjacent_tiles_around_position(var x: int, var y: int) -> void:
-	var tiles_to_flip := [
+func _flip_adjacent_tiles_around_position(x: int, y: int) -> void:
+	var tiles_to_flip: Array = [
 		get_tile_at_position(x, y + 1),
 		get_tile_at_position(x - 1, y),
 		get_tile_at_position(x, y - 1),

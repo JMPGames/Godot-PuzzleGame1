@@ -1,8 +1,8 @@
 extends Node
-
 class_name GameController
 
 export(int) var health
+
 var timer_text: RichTextLabel
 var health_text: RichTextLabel
 var state = Globals.GameState.PAUSED
@@ -39,8 +39,8 @@ func trigger_game_lost() -> void:
 
 func _update_game_timer(delta: float) -> void:
 	game_timer += delta
-	var milliseconds := fmod(game_timer, 1) * 1000
-	var seconds := fmod(game_timer, 60)
-	var minutes := fmod(game_timer, 60 * 60) / 60
-	var hours := fmod(fmod(game_timer, 3600 * 60) / 3600, 24)	
+	var milliseconds: float = fmod(game_timer, 1) * 1000
+	var seconds: float = fmod(game_timer, 60)
+	var minutes: float = fmod(game_timer, 60 * 60) / 60
+	var hours: float = fmod(fmod(game_timer, 3600 * 60) / 3600, 24)	
 	timer_text.text = "%02d:%02d:%02d:%02d" % [hours, minutes, seconds, milliseconds]

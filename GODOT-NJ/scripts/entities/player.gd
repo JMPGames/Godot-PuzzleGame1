@@ -1,5 +1,4 @@
 extends Entity
-
 class_name Player
 
 func _unhandled_input(event) -> void:
