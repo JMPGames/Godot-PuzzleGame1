@@ -2,11 +2,17 @@ extends Node
 class_name BoardController
 
 var board: Array
-var game_controller: Node
+var game_controller: GameController
+var sound_controller: SoundController
 var board_size: Vector2
 
-func build_board(_game_controller: Node, selected_board_size: Vector2) -> void:
+func build_board(
+	_game_controller: GameController,
+	_sound_controller: SoundController,
+	selected_board_size: Vector2
+) -> void:
 	game_controller = _game_controller
+	sound_controller = _sound_controller
 	board_size = selected_board_size
 	for x in range(selected_board_size.x):
 		board.append([])
@@ -41,7 +47,7 @@ func _position_is_out_of_bounds(var x: int, var y: int) -> bool:
 
 func _spawn_tile(var x: int, var y: int) -> Node:
 	var tile: Node = _get_tile_by_mode()
-	tile.initialize(game_controller, self)
+	tile.initialize(game_controller, sound_controller, self)
 	add_child(tile)
 	tile.place_entity(x, y)
 	return tile

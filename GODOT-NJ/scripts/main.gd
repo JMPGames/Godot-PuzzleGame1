@@ -18,15 +18,16 @@ var XLARGE_BOARD: Vector2 = Vector2(24, 12)
 onready var game_controller: GameController = $GameController
 onready var board_controller: BoardController = $BoardController
 onready var menu_controller: PauseMenuController = $MenuController
+onready var sound_controller: SoundController = $SoundController
 var player: Node
 var camera: Node
 var selected_board_size: Vector2 = SMALL_BOARD
 
 func _ready():
 	_setup_board_and_camera()
-	board_controller.build_board(game_controller, selected_board_size)
+	board_controller.build_board(game_controller, sound_controller, selected_board_size)
 	_place_player()
-	menu_controller.initialize(game_controller)
+	menu_controller.initialize(game_controller, sound_controller)
 	game_controller.begin(selected_board_size)
 
 func _place_player() -> void:
@@ -37,7 +38,7 @@ func _place_player() -> void:
 		rng.randi_range(0, selected_board_size.x - 1), # warning-ignore:narrowing_conversion
 		rng.randi_range(0, selected_board_size.y - 1) # warning-ignore:narrowing_conversion
 	)
-	player.initialize(game_controller, board_controller)
+	player.initialize(game_controller, board_controller, sound_controller)
 
 func _setup_board_and_camera() -> void:
 	camera = get_node(CAMERA_NODE_NAME)

@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/entities/player.gd"
 }, {
+"base": "Node",
+"class": "SoundController",
+"language": "GDScript",
+"path": "res://scripts/controllers/sound_controller.gd"
+}, {
 "base": "Resource",
 "class": "Stats",
 "language": "GDScript",
@@ -96,6 +101,7 @@ _global_script_class_icons={
 "MainMenuStatsPanelController": "",
 "PauseMenuController": "",
 "Player": "",
+"SoundController": "",
 "Stats": "",
 "SurviveGameController": "",
 "SurviveGameTile": "",

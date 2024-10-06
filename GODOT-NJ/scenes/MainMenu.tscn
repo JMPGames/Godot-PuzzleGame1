@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/controllers/main_menu_controller.gd" type="Script" id=1]
 [ext_resource path="res://scripts/controllers/main_menu_stat_panel_controller.gd" type="Script" id=2]
+[ext_resource path="res://scripts/controllers/sound_controller.gd" type="Script" id=3]
+[ext_resource path="res://sound/sfx/move.wav" type="AudioStream" id=4]
+[ext_resource path="res://sound/sfx/ui_negative.wav" type="AudioStream" id=5]
+[ext_resource path="res://sound/sfx/ui_positive.wav" type="AudioStream" id=6]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -180,8 +184,23 @@ rect_scale = Vector2( 0.8, 0.8 )
 text = "50"
 valign = 1
 
+[node name="SoundController" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="MoveAudio" type="AudioStreamPlayer" parent="SoundController"]
+stream = ExtResource( 4 )
+
+[node name="UIPositiveAudio" type="AudioStreamPlayer" parent="SoundController"]
+stream = ExtResource( 6 )
+
+[node name="UINegativeAudio" type="AudioStreamPlayer" parent="SoundController"]
+stream = ExtResource( 5 )
+
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="button_down" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_button_down"]
+[connection signal="button_up" from="GameModeOption" to="." method="_on_GameModeOption_button_up"]
 [connection signal="item_selected" from="GameModeOption" to="." method="_on_GameModeOption_item_selected"]
+[connection signal="button_up" from="DifficultyOption" to="." method="_on_DifficultyOption_button_up"]
 [connection signal="item_selected" from="DifficultyOption" to="." method="_on_DifficultyOption_item_selected"]
+[connection signal="button_up" from="BoardSizeOption" to="." method="_on_BoardSizeOption_button_up"]
 [connection signal="item_selected" from="BoardSizeOption" to="." method="_on_BoardSizeOption_item_selected"]
